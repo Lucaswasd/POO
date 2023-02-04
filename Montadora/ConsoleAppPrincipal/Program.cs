@@ -14,6 +14,10 @@ namespace ConsoleAppPrincipal
             Console.WriteLine();
             Console.WriteLine("Informação do segund pneu.");
             Pneu pneu2 = new Pneu(16, "Carro de passeio", "Firestone", true, 150);
+            //Criação do objeto carro
+            Carro corcel = new Carro();
+
+
             pneu2.Girar(60);
             pneu2.Exibir();
             pneu2.Girar(60);
