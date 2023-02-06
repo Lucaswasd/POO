@@ -20,7 +20,7 @@
         public Pneu PneuEstepe { get; set; }
 
 
-        public Carro(string _modelo, int ano, int _VelocidadeMaxima, string _Placa)
+        public Carro(int ano, int _VelocidadeMaxima, string _Placa)
         {
             VelocidadeAtual = 0;
             //iniciando os pnus do carro
