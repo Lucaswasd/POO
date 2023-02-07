@@ -20,58 +20,129 @@
         public Pneu PneuEstepe { get; set; }
 
 
-        public Carro(int ano, int _VelocidadeMaxima, string _Placa)
+        public Carro(string _marca, string _modelo, int _ano, int _VelocidadeMaxima, string _Placa)
         {
             VelocidadeAtual = 0;
             //iniciando os pnus do carro
-            PneuDianteiroEsquerdo = new Pneu(16, "Carro de Passeio", "Firestone", false, 150);
-            PneuDianteiroDireito = new Pneu(16, "Carro de Passeio", "Firestone", false, 150);
-            PneuTraseiroEsquerdo = new Pneu(16, "Carro de Passeio", "Firestone", false, 150);
-            PneuTraseiroDireito = new Pneu(16, "Carro de Passeio", "Firestone", false, 150);
-            PneuEstepe = new Pneu(16, "Carro de passeio", "Firestone", true, 150);
+            PneuDianteiroEsquerdo = new Pneu(16, "Carro de Passeio", false, 150);
+            PneuDianteiroDireito = new Pneu(16, "Carro de Passeio", false, 150);
+            PneuTraseiroEsquerdo = new Pneu(16, "Carro de Passeio", false, 150);
+            PneuTraseiroDireito = new Pneu(16, "Carro de Passeio", false, 150);
+            PneuEstepe = new Pneu(16, "Carro de passeio", true, 150);
             Odometro = 0;
-            Marca = "Ford";
-            Modelo = "Corsel";
+            Marca = _marca;
+            Modelo = _modelo;
+            Ano = _ano;
             Placa = _Placa;
-            VelocidadeMaxima = 143;
-            PneuEstepe = new Pneu(16, "Carro de passeio", "Firestone", true, 150);
+            VelocidadeMaxima = _VelocidadeMaxima;
+            PneuEstepe = new Pneu(16, "Carro de passeio", true, 150);
         }
 
         public void Ligar()
         {
-            if (Ligado == true)
+            if (PercentualCombustivel > 0)
             {
-                Console.WriteLine("O Carro está ligado");
-                return;
-            }
-            else
-            {
-                if (PercentualCombustivel > 0)
+                PercentualCombustivel = PercentualCombustivel - 3;
+                Ligado = true;
+                if (PercentualCombustivel <= 0)
                 {
-                    Ligado = true;
+                    PercentualCombustivel = 0;
+                    Desligar();
                 }
-
             }
         }
         public void Desligar()
         {
             Ligado = false;
+            Parar();
+        }
+        public void Acelerar(int _impulso)
+        {
+            if (Ligado == true && _impulso > 0)
+            {
+                Odometro += 18;
+                PercentualCombustivel = PercentualCombustivel - 8;
+                if (PercentualCombustivel <= 0)
+                {
+                    PercentualCombustivel = 0;
+                    Desligar();
+                    return;
+                }
+                VelocidadeAtual = VelocidadeAtual + _impulso;
+                PneuDianteiroDireito.Girar(_impulso);
+                PneuDianteiroEsquerdo.Girar(_impulso);
+                PneuTraseiroDireito.Girar(_impulso);
+                PneuTraseiroEsquerdo.Girar(_impulso);
+            }
+        }
+        public void Frear(int _reduzir)
+        {
+            VelocidadeAtual = VelocidadeAtual - _reduzir;
+
+            if (VelocidadeAtual < 0)
+                VelocidadeAtual = 0;
+        }
+        /// <summary>
+        /// Este método vai abastecer o carro;
+        /// </summary>
+        /// <param name="_quantidadeCombustivel">Informe o percentual de combustível que deseja abastecer, caso informe 0 o método 
+        /// irá completar o tanque.
+        /// O valor não pode ser inferior a 1000</param>
+
+        public void Abastecer(int _quantidadeCombustivel = 0)
+        {
+            if (_quantidadeCombustivel == 0)
+                _quantidadeCombustivel = 100 - PercentualCombustivel;
+
+            if (PercentualCombustivel + _quantidadeCombustivel > 100)
+            {
+                Console.WriteLine("A quantidade de combustível ultrapassa o limite do tanque");
+                return;
+            }
+                if (PercentualCombustivel < 100)
+                    PercentualCombustivel = PercentualCombustivel + _quantidadeCombustivel;
+        }
+        public void Parar()
+        {
             VelocidadeAtual = 0;
             PneuDianteiroDireito.VelocidadeAtual = 0;
             PneuDianteiroEsquerdo.VelocidadeAtual = 0;
             PneuTraseiroDireito.VelocidadeAtual = 0;
             PneuTraseiroEsquerdo.VelocidadeAtual = 0;
         }
-        public void Acelerar()
+        public void Exibir()
         {
+            Console.WriteLine("Marca: " + Marca);
+            Console.WriteLine("Modelo: " + Modelo);
+            Console.WriteLine("Ano: " + Ano);
+            Console.WriteLine("Placa: " + Placa);
+            Console.WriteLine("VelocidadeMaxima: " + VelocidadeMaxima);
+            Console.WriteLine("VelocidadeAtual: " + VelocidadeAtual);
+            Console.WriteLine("Odometro: " + Odometro);
+            Console.WriteLine("Ligado: " + Ligado);
+            Console.WriteLine("PercentualCombustivel: " + PercentualCombustivel);
 
-        }
-        public void Frear()
-        {
+            Console.WriteLine("\nPneuDianteiroEsquerdo");
+            PneuDianteiroEsquerdo.Exibir();
+            Console.WriteLine("\nPneuDianteiroDireito");
+            PneuDianteiroDireito.Exibir();
+            Console.WriteLine("\nPneuTraseiroEsquerdo");
+            PneuTraseiroEsquerdo.Exibir();
+            Console.WriteLine("\nPneuTraseiroDireito");
+            PneuTraseiroDireito.Exibir();
+            Console.WriteLine("\nPneuEstepe");
+            PneuEstepe.Exibir();
+            
 
-        }
-        public void Abastecer()
-        {
+
+
+
+
+
+
+
+
+
 
         }
     }

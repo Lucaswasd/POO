@@ -17,13 +17,13 @@
         public int PercentualBorracha { get; set; }
 
         //ctor, criação de objetos
-        public Pneu(int _Aro, string _tipo, string _marca, bool _espete, int _velocidadeMaxima)
+        public Pneu(int _Aro, string _tipo, bool _espete, int _velocidadeMaxima)
         {
             Aro = _Aro;
             Tipo = _tipo;
-            Marca = _marca;
-            Estepe = _espete;
             VelocidadeMaxima = _velocidadeMaxima;
+            Estepe = _espete;
+
             Cor = "Preto";
             Furado = false;
             Estourado = false;
@@ -86,18 +86,17 @@
             if (Estourado)
                 return;
 
-            Console.WriteLine();
             Console.WriteLine("Cor: " + Cor);
-            Console.WriteLine("Tipo " + Tipo);
-            Console.WriteLine("Marca " + Marca);
-            Console.WriteLine("Aro " + Aro);
-            Console.WriteLine("Furado " + Furado);
-            Console.WriteLine("Estourado " + Estourado);
-            Console.WriteLine("Estepe " + Estepe);
-            Console.WriteLine("VelocidadeAtual " + VelocidadeAtual);
-            Console.WriteLine("VelocidadeMaxima " + VelocidadeMaxima);
-            Console.WriteLine("PercetualBorracha " + PercentualBorracha);
-            Console.WriteLine("TWI " + TWI);
+            Console.WriteLine("Tipo: " + Tipo);
+            Console.WriteLine("Marca: " + Marca);
+            Console.WriteLine("Aro: " + Aro);
+            Console.WriteLine("Furado: " + Furado);
+            Console.WriteLine("Estourado: " + Estourado);
+            Console.WriteLine("Estepe: " + Estepe);
+            Console.WriteLine("VelocidadeAtual: " + VelocidadeAtual);
+            Console.WriteLine("VelocidadeMaxima: " + VelocidadeMaxima);
+            Console.WriteLine("PercetualBorracha: " + PercentualBorracha);
+            Console.WriteLine("TWI: " + TWI);
         }
     }
 }
