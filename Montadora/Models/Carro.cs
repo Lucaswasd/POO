@@ -99,8 +99,8 @@
                 Console.WriteLine("A quantidade de combustível ultrapassa o limite do tanque");
                 return;
             }
-                if (PercentualCombustivel < 100)
-                    PercentualCombustivel = PercentualCombustivel + _quantidadeCombustivel;
+            if (PercentualCombustivel < 100)
+                PercentualCombustivel = PercentualCombustivel + _quantidadeCombustivel;
         }
         public void Parar()
         {
@@ -132,18 +132,6 @@
             PneuTraseiroDireito.Exibir();
             Console.WriteLine("\nPneuEstepe");
             PneuEstepe.Exibir();
-            
-
-
-
-
-
-
-
-
-
-
-
         }
     }
 }
